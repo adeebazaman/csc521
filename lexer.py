@@ -27,6 +27,10 @@ IDENT=      '[a-zA-Z]+[a-zA-Z0-9_]*'
 INDEX=     '[+-]?((\d+(\.\d*)?)|(\.\d+))'
 NUMBER=      '[0-9]+'
 
+ui= sys.stdin[-1]
+file_input= open(ui,'r')
+user_input= file_input.read()
+
 def lexer( user_input, tokens):
 
     new_input=" "       ##new string
