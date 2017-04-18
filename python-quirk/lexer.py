@@ -41,16 +41,16 @@ def lexer( user_input, tokens):
     for i in split_text:            ##for i in dictionary of tokens
         if i in tokens:
             new_input += tokens[i]+ " "
-            
+
         else:
             if i in find_RE2:
                 new_input += i.replace(i,"INDEX"+" ")
-            
+
             else:
                 new_input +="NUMBER:"+i+ " "
-                
 
-       
+
+
     return new_input
 
 
@@ -71,6 +71,3 @@ def main():
 if __name__=="__main__":
 
     main()
-
-
-

@@ -4,10 +4,10 @@ import pprint
 pp = pprint.PrettyPrinter(indent=3, depth=15)
 
 '''Uncomment before printing'''
-#tokens = ["VAR","IDENT:x","ASSIGN","LPAREN","NUMBER:5","MULT","NUMBER:2","RPAREN","DIV","NUMBER:5","RETURN","IDENT:x","EOF"]
+# tokens = ["VAR","IDENT:x","ASSIGN","LPAREN","NUMBER:5","MULT","NUMBER:2","RPAREN","DIV","NUMBER:5","RETURN","IDENT:x","EOF"]
 
 #tokens= ["FUNCTION","IDENT;FOO","EOF"]
-#tokens = ["PRINT","NUMBER:1","ADD","NUMBER:4","SUB","NUMBER:3","EOF"]
+# tokens = ["PRINT","NUMBER:1","ADD","NUMBER:4","SUB","NUMBER:3","EOF"]
 #begin utilities
 def is_ident(tok):
     '''Determines if the token is of type IDENT.
@@ -33,7 +33,7 @@ def Program(token_index):
      <Statement> <Program>
      | <Statement>
      '''
-    #<Statement> 
+    #<Statement>
     (success, returned_index, returned_subtree) = Statement(token_index)
     if success:
         subtree= ["Program0",returned_subtree]
@@ -43,7 +43,7 @@ def Program(token_index):
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]
-        
+
     #<Statement>
     (success, returned_index, returned_subtree) = Statement(token_index)
     if success:
@@ -75,10 +75,10 @@ def Statement(token_index):
         return [True, returned_index, subtree]
     return [False, token_index, []]
 
-    
 
 
-            
+
+
 def SingleAssignment(token_index):
 
     (success, returned_index, returned_subtree) = Expression(token_index)
@@ -96,9 +96,9 @@ def SingleAssignment(token_index):
 
     (success, returned_index, returned_subtree) = Expression(token_index)
     if success:
-    
+
         return [True, returned_index, ["Statement0",returned_subtree]]
-    
+
     return [False, token_index, []]
 
 def FunctionDeclaration(token_index):
@@ -170,7 +170,7 @@ def FunctionBody(token_index):
         if success:
             subtree.append(returned_subtree)
             return [True, returned_index, subtree]
-        
+
 ##        return [True, returned_index, ["FunctionBody0", returned_subtree]]
 
     #<Return>
@@ -333,10 +333,10 @@ def Expression(token_index):
         <Term> ADD <Expression>
         | <Term> SUB <Expression>
         | <Term>
-        
+
     '''
 
-         
+
     # <Term> ADD <Expression>
     (success, returned_index, returned_subtree) = Term(token_index)
     if success:
@@ -348,7 +348,7 @@ def Expression(token_index):
             if success:
                 subtree.append(returned_subtree)
                 return [True, returned_index, subtree]
-    
+
 ##    # <Term> SUB <Expression>
     (success, returned_index, returned_subtree) = Term(token_index)
     if success:
@@ -360,7 +360,7 @@ def Expression(token_index):
             if success:
                 subtree.append(returned_subtree)
                 return [True, returned_index, subtree]
-            
+
 
     # <Term> COLON <Expression>
     (success, returned_index, returned_subtree) = Term(token_index)
@@ -398,7 +398,7 @@ def Expression(token_index):
             if success:
                 subtree.append(returned_subtree)
                 return [True, returned_index, subtree]
-       
+
     # <Term>
     (success, returned_index, returned_subtree) = Term(token_index)
     if success:
@@ -467,7 +467,7 @@ def Factor(token_index):
     (success, returned_index, returned_subtree) = FunctionCall(token_index)
     if success:
         return [True, returned_index, ["Factor2", returned_subtree]]
-    
+
     #<Value> EXP <Factor>
     (success, returned_index, returned_subtree) = Value(token_index)
     if success:
@@ -490,7 +490,7 @@ def Factor(token_index):
 ##                subtree.append(returned_subtree)
 ##                return [True, returned_index, subtree]
 
-            
+
 
     #<Value> COMMA <Factor>
     (success, returned_index, returned_subtree) = Value(token_index)
@@ -504,9 +504,9 @@ def Factor(token_index):
                 return [True, returned_index, subtree]
 
 
-   
 
-            
+
+
     #<Value>
     (success, returned_index, returned_subtree) = Value(token_index)
     if success:
@@ -605,18 +605,18 @@ def Value(token_index):
 ##    if success:
 ##        (success, returned_index, returned_subtree) = Variable(token_index)
 ##        return [True, returned_index, ["Variable0", returned_subtree]]
-    
+
     #<name>
     (success, returned_index, returned_subtree) = Name(token_index)
     if success:
         (success, returned_index, returned_subtree) = Name(token_index)
         return [True, returned_index, ["Value0", returned_subtree]]
-    
+
     #<number>
     (success, returned_index, returned_subtree) = Number(token_index)
     if success:
         return [True, returned_index, ["Value1", returned_subtree]]
-    
+
     return [False, token_index, []]
 
 
@@ -647,11 +647,11 @@ def Name(token_index):
         | ADD IDENT
     '''
     subtree = []
-    
+
     if is_ident(tokens[token_index]):
         subtree = ["Name0", tokens[token_index]]
         return [True, token_index + 1, subtree]
-        
+
     if "SUB" == tokens[token_index]:
         if is_ident(tokens[token_index + 1]):
             subtree = ["Name1", tokens[token_index], tokens[token_index + 1]]
@@ -673,8 +673,8 @@ def Number(token_index):
     if is_number(tokens[token_index]):
         subtree = ["Number0", tokens[token_index]]
         return [True, token_index + 1, subtree]
-    
-    
+
+
     if "SUB" == tokens[token_index]:
         if is_number(tokens[token_index + 1]):
             subtree = ["Number1", tokens[token_index], tokens[token_index + 1]]

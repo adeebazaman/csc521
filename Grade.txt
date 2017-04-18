@@ -1,0 +1,23 @@
+Lexer - 19/30
+  Unable to run Lexer at in this iteration.
+  ALL EXAMPLES HAVE FAILED.
+  Appears to be an error on line 30 due to the ui= sys.stdin[-1]
+  But the code was there and it seems like it would work if this fatal bug was
+  not there.
+
+Parser: 22/30
+
+  While the parser is not up to specifications. It does appears to work with
+  the easier examples such as 1. It does not use stdin in a way that is was
+  described in the homework write up.
+
+Interpreter: 0/20
+
+  No Interpreter
+
+Style: 19/20
+
+  Readme includes all information. There are some repeated pep8 warnings.
+  Common warnings:
+    E303
+    W293
